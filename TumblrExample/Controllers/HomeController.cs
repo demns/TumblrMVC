@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.WebPages;
 using DontPanic.TumblrSharp;
 using DontPanic.TumblrSharp.Client;
 
@@ -16,13 +17,17 @@ namespace TumblrExample.Controllers {
         //    return View();
         //}
 
+
         [HttpGet]
-        public ActionResult Index() {
+        public ActionResult Index(string id) {
+            //use: http://localhost:62385/?id=samsonau
+            //use: http://localhost:62385/?id=huskyhuddle
+            id = id.IsEmpty() ? "samsonau" : id;
 
             var tc = new TumblrClient(new HmacSha1HashProvider(), "z35mVaZpxg4JC7IdJ1KB1GHYOqYXfwwnv0cIOlHafuMUZ7Tlat",
                 "gn3rVOlvrYVjLZP4tYnxb1FXYNiFGFZt3twWotz84VeYb9oWbj");
 
-            var qq = tc.GetPostsAsync("samsonau");
+            var qq = tc.GetPostsAsync(id);
             qq.Wait();
 
             var q = qq.Result;
