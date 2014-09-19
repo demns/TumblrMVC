@@ -1,8 +1,11 @@
-﻿@model dynamic
+﻿@model DontPanic.TumblrSharp.Client.Photo[]
 
 @{
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>title</h2>
+
+@foreach (var q in @Model) {
+    <h4>@q.OriginalSize.ImageUrl</h4>
+}
